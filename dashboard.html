@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Infrastructure Status Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { color: #333; }
+    table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background: #333; color: white; }
+    .up { color: green; font-weight: bold; }
+    .down { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Infrastructure Status Dashboard</h1>
+  <p>Auto-updated every 15 minutes via GitHub Actions</p>
+  <table id="statusTable">
+    <tr><th>Timestamp</th><th>Service</th><th>Status</th><th>Response Time (ms)</th></tr>
+  </table>
+
+  <script>
+    fetch('status_log.csv')
+      .then(res => res.text())
+      .then(data => {
+        const rows = data.trim().split('\n').slice(1).reverse().slice(0, 20);
+        const table = document.getElementById('statusTable');
+        rows.forEach(row => {
+          const [timestamp, service, status, responseTime] = row.split(',');
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${timestamp}</td><td>${service}</td><td class="${status.toLowerCase()}">${status}</td><td>${responseTime}</td>`;
+          table.appendChild(tr);
+        });
+      });
+  </script>
+</body>
+</html>
