@@ -2,7 +2,7 @@
 Simple infrastructure monitoring dashboard
 # Infrastructure Monitor
 
-![Status](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/Nitharshanass/infra-monitor/main/current_status.txt&label=Status&query=$&color=brightgreen)
+![Status](https://img.shields.io/badge/status-monitoring-brightgreen)
 
 This repo automatically monitors website uptime every 15 minutes using GitHub Actions — no server required.
 
